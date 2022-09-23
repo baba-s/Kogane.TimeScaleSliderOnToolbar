@@ -15,25 +15,46 @@ namespace Kogane.Internal
 
         private static void OnToolbarGUI()
         {
-            var oldLabelWidth = EditorGUIUtility.labelWidth;
-            EditorGUIUtility.labelWidth = 80;
+            var setting = TimeScaleSliderOnToolbarSetting.instance;
 
-            try
-            {
-                Time.timeScale = EditorGUILayout.Slider
-                (
-                    label: "Time Scale",
-                    value: Time.timeScale,
-                    leftValue: 0,
-                    rightValue: 4
-                );
+            if ( !setting.IsEnable ) return;
 
-                GUILayout.FlexibleSpace();
-            }
-            finally
+            var timeScaleArray = setting.TimeScaleArray;
+            var count          = timeScaleArray.Count;
+
+            EditorGUILayout.LabelField( "Time Scale", GUILayout.Width( 70 ) );
+
+            for ( var i = 0; i < count; i++ )
             {
-                EditorGUIUtility.labelWidth = oldLabelWidth;
+                var timeScale = timeScaleArray[ i ];
+                //
+                // var guiStyle = i == 0 ? new GUIStyle( EditorStyles.miniButtonLeft )
+                //         : i == count  ? new GUIStyle( EditorStyles.miniButtonRight )
+                //                         : new GUIStyle( EditorStyles.miniButtonMid )
+                //     ;
+
+                if ( GUILayout.Button( $"{timeScale:0.##}" ) )
+                {
+                    Time.timeScale = timeScale;
+                }
             }
+
+            // var currentIndex   = Array.IndexOf( timeScaleArray, Time.timeScale );
+            //
+            // var newIndex = EditorGUILayout.IntSlider
+            // (
+            //     label: "Time Scale",
+            //     value: currentIndex,
+            //     leftValue: 0,
+            //     rightValue: timeScaleArray.Length - 1
+            // );
+            //
+            // if ( currentIndex != newIndex )
+            // {
+            //     Time.timeScale = timeScaleArray[ newIndex ];
+            // }
+
+            GUILayout.FlexibleSpace();
         }
     }
 }
