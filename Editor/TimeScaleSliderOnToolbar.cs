@@ -33,7 +33,7 @@ namespace Kogane.Internal
                 //                         : new GUIStyle( EditorStyles.miniButtonMid )
                 //     ;
 
-                if ( GUILayout.Button( $"{timeScale:0.##}" ) )
+                if ( GUILayout.Button( $"{timeScale:0.##}", EditorStyles.toolbarButton ) )
                 {
                     Time.timeScale = timeScale;
                 }
