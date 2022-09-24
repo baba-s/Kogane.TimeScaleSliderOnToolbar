@@ -19,21 +19,20 @@ namespace Kogane.Internal
 
             if ( !setting.IsEnable ) return;
 
-            var timeScaleArray = setting.TimeScaleArray;
-
-            EditorGUILayout.LabelField( "Time Scale", GUILayout.Width( 70 ) );
-
-            foreach ( var timeScale in timeScaleArray )
+            using ( new EditorGUILayout.HorizontalScope( GUILayout.Width( 224 ) ) )
             {
-                var text = $"{timeScale:0.##}";
+                EditorGUILayout.LabelField( "Time Scale", GUILayout.Width( 70 ) );
 
-                if ( !GUILayout.Button( text, EditorStyles.toolbarButton ) ) continue;
+                foreach ( var timeScale in setting.TimeScaleArray )
+                {
+                    var text = $"{timeScale:0.##}";
 
-                Time.timeScale = timeScale;
-                Debug.Log( $"Time Scale: {text}" );
+                    if ( !GUILayout.Button( text, EditorStyles.toolbarButton ) ) continue;
+
+                    Time.timeScale = timeScale;
+                    Debug.Log( $"Time Scale: {text}" );
+                }
             }
-
-            GUILayout.FlexibleSpace();
         }
     }
 }
