@@ -1,4 +1,4 @@
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 using UnityToolbarExtender;
 
@@ -30,7 +30,9 @@ namespace Kogane.Internal
                     if ( !GUILayout.Button( text, EditorStyles.toolbarButton ) ) continue;
 
                     Time.timeScale = timeScale;
-                    Debug.Log( $"Time Scale: {text}" );
+                    var message = $"Time Scale: {text}";
+                    TooltipWindow.Open( message );
+                    Debug.Log( message );
                 }
             }
         }
